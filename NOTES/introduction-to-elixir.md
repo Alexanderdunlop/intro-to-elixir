@@ -64,3 +64,119 @@ Or enumerations in C or C++
 `:"12387 &*^#2`
 
 Now that atom itself consists of 2 pieces, there is the actual text then there is the value. The text is what ever you put after the `:` character and at runtime this text is kept inside of a structure called the atom table. The value is the data that goes into the variable, its merly a reference to the atom table. This is why atoms are used for named constants because the are both efficent in memory and in preformance.
+
+You can bind a variable to an atom
+
+`var = :atom`
+
+The variable var doesn't contain the entire text of the atom but only a reference to the atom table. Therefor the memory consumption of this variable is fairly low and of course the code is still readable.
+
+Another way to write an atom is to use an uppercase character
+
+`AModule`
+
+This is called an alias `AModule`
+
+`AModule` is the same as `:"Elixir.AModule"`
+
+When you use an alias, Elixir will implicatly add the Exlixir . prefix to its text then it will insert an Atom there.
+
+`AModule == Elixir.AModule`
+`true`
+
+Aliases are useful because you can use them to rename existing Module names
+
+```elixir
+alias IO, as: MyIO
+MyIO.puts "Hello"
+Hello
+:ok
+```
+
+elixir has boolean values
+
+```elixir
+> true
+true
+true
+> false
+false
+false
+```
+
+Both of these values are actually atoms
+
+```elixir
+> :true == true
+:true == true
+true
+```
+
+```elixir
+> :false == false
+:false == false
+true
+```
+
+```elixir
+> true and false
+true and false
+false
+> true or false
+true or false
+true
+> not true
+not true
+false
+```
+
+Along with booleans we also have a special atom called nil, nil is like null in other programing langs
+
+```elixir
+> nil
+nil
+nil
+> :nil
+:nil
+nil
+```
+
+Along with other languages the atoms `nil` & `false` are treated as falsy values where as everything else is treated as a truethy value
+
+```elixir
+> if 10 do
+if 10 do
+> IO.puts = "true"
+IO.puts "true"
+> end
+end
+true
+:ok
+```
+
+```elixir
+> if nil do
+if nil do
+> IO.puts "True"
+IO.puts "True"
+> end
+end
+nil
+```
+
+```
+> IO.puts "True"
+IO.puts "True"
+> end
+end
+nil
+> nil || false || 4 || true
+nil || false || 4 || true
+4
+> true && 5
+true && 5
+5
+> !5
+!5
+false
+```
